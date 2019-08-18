@@ -28,24 +28,27 @@ def test_agent(testbed, agent, iters):
 
 np.random.seed(10)
 
-number_arms = 10
+number_arms = 20
 testbed = Arms(number_arms)
 iters_test = 10000
 print(testbed)
 
 print('\nMODELS OF VARIOUS AGENTS:')
-agent1 = Agent(number_arms, epsilon=0, Q_0=-3)  # -1 epsilon will never explore
+agent1 = Agent(number_arms, epsilon=0, Q_0=1)  # -1 epsilon will never explore
 reward1, model1 = test_agent(testbed, agent1, iters_test)
+plot_model(model1, iters_test, testbed.arms, name="agent1")
 
-agent2 = Agent(number_arms, epsilon=0.01, Q_0=-3)
+agent2 = Agent(number_arms, epsilon=0.0, Q_0=-1)
 reward2, model2 = test_agent(testbed, agent2, iters_test)
+plot_model(model2, iters_test, testbed.arms, name="agent2")
 
 agent3 = Agent(number_arms, epsilon=0.1, Q_0=-3)
 reward3, model3 = test_agent(testbed, agent3, iters_test)
-plot_model(model3, iters_test, testbed.arms)
+plot_model(model3, iters_test, testbed.arms, name="agent3")
 
 agent4 = Agent(number_arms, epsilon=1)
 reward4, model4 = test_agent(testbed, agent4, iters_test)
+plot_model(model4, iters_test, testbed.arms, name="agent4")
 
 compare_avg_performance([agent1, agent2, agent3, agent4], iters_test,
                         [reward1, reward2, reward3, reward4],

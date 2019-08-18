@@ -6,11 +6,12 @@ class Agent():
     def __init__(self, observed_size, epsilon=0.03, Q_0=0):
         # agent characteristics:
         self.epsilon = epsilon
+        self.Q_0 = Q_0
         # -----------------------------------
         # memory:
         self.k = 0  # internal memory of iteration
         # list of expected values corresponding with arm id:
-        self.model = [Q_0]*observed_size
+        self.model = [self.Q_0]*observed_size
         # list of attempt counts corresponding with arm id:
         self.tally = [0]*observed_size
         # -----------------------------------
