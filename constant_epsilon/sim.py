@@ -3,8 +3,7 @@ import numpy as np
 
 
 class Arms():
-    def __init__(self, number_of_arms, seed=0):
-        self.seed = seed
+    def __init__(self, number_of_arms):
         self.size = number_of_arms
         self.arms = []
         for i in range(number_of_arms):

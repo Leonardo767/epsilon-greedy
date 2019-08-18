@@ -10,7 +10,7 @@ class Agent():
         # memory:
         self.k = 0  # internal memory of iteration
         # list of expected values corresponding with arm id:
-        self.model = [0.5]*observed_size
+        self.model = [0]*observed_size
         # list of tallied rewards corresponding with arm id:
         self.tally = [0]*observed_size
         # -----------------------------------
@@ -21,7 +21,7 @@ class Agent():
         return "".join(out)
 
     def choose_action(self):
-        if np.random.uniform() < self.epsilon:
+        if np.random.uniform() < self.epsilon or self.k == 0:
             # explore
             a_t = np.random.randint(0, len(self.model))
         else:
