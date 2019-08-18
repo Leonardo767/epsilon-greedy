@@ -1,0 +1,11 @@
+{
+  "python.pythonPath": "C:\\Users\\Leonardo\\Documents\\Environments\\general_RL_env\\Scripts\\python.exe",
+  "python.autoComplete.extraPaths": [
+    "C:\\Users\\Leonardo\\Documents\\Environments\\general_RL_env\\Lib\\site-packages"
+  ],
+  "python.linting.pylintArgs": [
+    "--errors-only",
+    "--generated-members=numpy.* ,torch.* ,cv2.* , cv.*"
+  ],
+  "python.linting.pylintEnabled": true
+}
