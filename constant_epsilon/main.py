@@ -34,15 +34,15 @@ iters_test = 10000
 print(testbed)
 
 print('\nMODELS OF VARIOUS AGENTS:')
-agent1 = Agent(number_arms, epsilon=0, Q_0=1)  # -1 epsilon will never explore
+agent1 = Agent(number_arms, epsilon=0, Q_0=0)  # -1 epsilon will never explore
 reward1, model1 = test_agent(testbed, agent1, iters_test)
 plot_model(model1, iters_test, testbed.arms, name="agent1")
 
-agent2 = Agent(number_arms, epsilon=0.0, Q_0=-1)
+agent2 = Agent(number_arms, epsilon=0.01, Q_0=0)
 reward2, model2 = test_agent(testbed, agent2, iters_test)
 plot_model(model2, iters_test, testbed.arms, name="agent2")
 
-agent3 = Agent(number_arms, epsilon=0.1, Q_0=-3)
+agent3 = Agent(number_arms, epsilon=0.1, Q_0=0)
 reward3, model3 = test_agent(testbed, agent3, iters_test)
 plot_model(model3, iters_test, testbed.arms, name="agent3")
 
