@@ -2,9 +2,16 @@ import numpy as np
 from bokeh.plotting import figure, output_file, show
 
 
-def plot_model(agent_model_hist, true_model):
+def plot_model(agent_model_hist, iters, true_model):
     p = figure()
-
+    t = np.arange(0, iters - 1)
+    print(agent_model_hist)
+    agent_model_hist = np.array(agent_model_hist)
+    agent_model_hist = np.transpose(agent_model_hist)
+    arm_id = 0
+    for arm in agent_model_hist:
+        p.line(t, arm, legend=str(arm_id))
+        arm_id += 1
     output_file("plot_model.html")
     show(p)
     return

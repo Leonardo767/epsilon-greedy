@@ -17,7 +17,10 @@ class Agent():
 
     def __repr__(self):
         out = ["Agent where epsilon = {}\n".format(self.epsilon)]
-        out.append("Current model: {}".format(self.model))
+        model_to_display = []
+        for i in range(len(self.model)):
+            model_to_display.append(round(self.model[i], 3))
+        out.append("Current model: {}".format(model_to_display))
         return "".join(out)
 
     def choose_action(self):
@@ -27,7 +30,7 @@ class Agent():
         else:
             # exploit
             a_t = np.argmax(self.model)
-        # remember the action agent took
+        # remember the action that the agent took
         self.a_t = a_t
         return a_t
 
@@ -38,4 +41,6 @@ class Agent():
         k = self.k
         a_t = self.a_t
         Q_k = self.model[a_t]
-        self.model[a_t] = round(Q_k + 1/k*(r_t - Q_k), 3)
+        Q_k_new = Q_k + 1/k*(r_t - Q_k)
+        print('updating from {} to {} for arm {}'.format(Q_k, Q_k_new, a_t))
+        self.model[a_t] = Q_k_new
