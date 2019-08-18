@@ -4,8 +4,7 @@ from bokeh.plotting import figure, output_file, show
 
 def plot_model(agent_model_hist, iters, true_model):
     p = figure()
-    t = np.arange(0, iters - 1)
-    print(agent_model_hist)
+    t = np.arange(0, iters)
     agent_model_hist = np.array(agent_model_hist)
     agent_model_hist = np.transpose(agent_model_hist)
     arm_id = 0
@@ -21,7 +20,6 @@ def plot_avg_performance(agent, iters, reward_hist):
     p = figure(title='Epsilon = {}'.format(agent.epsilon))
     t = np.arange(0, iters - 1)
     r_avg = np.array(reward_hist)
-    print(r_avg)
     p.line(t, r_avg)
     output_file("plot_avg_perf.html")
     show(p)

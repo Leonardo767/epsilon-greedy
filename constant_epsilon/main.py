@@ -23,31 +23,30 @@ def test_agent(testbed, agent, iters):
         r_total += r_t
         avg_reward_hist.append(r_total/t)
         model_log.append(agent.model)
-    print(agent)
-    return avg_reward_hist, model_log
+    return avg_reward_hist, agent.model_hist
 
 
-np.random.seed(0)
+np.random.seed(10)
 
 number_arms = 10
 testbed = Arms(number_arms)
-iters_test = 10
+iters_test = 10000
 print(testbed)
 
 print('\nMODELS OF VARIOUS AGENTS:')
-# agent1 = Agent(number_arms, epsilon=-1)  # -1 epsilon will never explore
-# reward1, model1 = test_agent(testbed, agent1, iters_test)
+agent1 = Agent(number_arms, epsilon=0, Q_0=-3)  # -1 epsilon will never explore
+reward1, model1 = test_agent(testbed, agent1, iters_test)
 
-# agent2 = Agent(number_arms, epsilon=0.01)
-# reward2, model2 = test_agent(testbed, agent2, iters_test)
+agent2 = Agent(number_arms, epsilon=0.0, Q_0=-3)
+reward2, model2 = test_agent(testbed, agent2, iters_test)
 
 agent3 = Agent(number_arms, epsilon=0.1)
 reward3, model3 = test_agent(testbed, agent3, iters_test)
-plot_model(model3, iters_test, testbed.arms)
+# plot_model(model3, iters_test, testbed.arms)
 
-# agent4 = Agent(number_arms, epsilon=1)
-# reward4, model4 = test_agent(testbed, agent4, iters_test)
+agent4 = Agent(number_arms, epsilon=1)
+reward4, model4 = test_agent(testbed, agent4, iters_test)
 
-# compare_avg_performance([agent1, agent2, agent3, agent4], iters_test,
-#                         [reward1, reward2, reward3, reward4],
-#                         ['red', 'blue', 'green', 'black'])
+compare_avg_performance([agent1, agent2, agent3, agent4], iters_test,
+                        [reward1, reward2, reward3, reward4],
+                        ['red', 'blue', 'green', 'black'])
