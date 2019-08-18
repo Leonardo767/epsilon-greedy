@@ -3,9 +3,9 @@ import numpy as np
 
 
 class Agent():
-    def __init__(self, observed_size):
+    def __init__(self, observed_size, epsilon=0.03):
         # agent characteristics:
-        self.epsilon = 0.03
+        self.epsilon = epsilon
         # -----------------------------------
         # memory:
         self.k = 0  # internal memory of iteration

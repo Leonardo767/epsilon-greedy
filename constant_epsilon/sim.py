@@ -8,7 +8,8 @@ class Arms():
         self.size = number_of_arms
         self.arms = []
         for i in range(number_of_arms):
-            self.arms.append(round(np.random.normal(0.5, 0.1), 3))
+            value = round(np.random.normal(), 3)
+            self.arms.append(value)
 
     def __repr__(self):
         out = ['Environment with {} arms:\n'.format(self.size)]
@@ -16,9 +17,5 @@ class Arms():
         return "".join(out)
 
     def get_reward(self, state_selected):
-        # gather info about selection from environment
-        prob_success = self.arms[state_selected]
-        # simulate expected value
-        if np.random.uniform() < prob_success:
-            return 1
-        return 0
+        # return action value + noise
+        return self.arms[state_selected] + np.random.normal()
