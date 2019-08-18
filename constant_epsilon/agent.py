@@ -11,11 +11,11 @@ class Agent():
         self.k = 0  # internal memory of iteration
         # list of expected values corresponding with arm id:
         self.model = [Q_0]*observed_size
-        # list of tallied rewards corresponding with arm id:
+        # list of attempt counts corresponding with arm id:
         self.tally = [0]*observed_size
         # -----------------------------------
         # model logger
-        self.model_hist = [self.model]
+        self.model_hist = [self.model.copy()]
 
     def __repr__(self):
         out = ["Agent where epsilon = {}\n".format(self.epsilon)]
@@ -34,17 +34,15 @@ class Agent():
             a_t = np.argmax(self.model)
         # remember the action that the agent took
         self.a_t = a_t
+        self.tally[a_t] += 1  # increment attempt counter for given a_t
         return a_t
 
     def update_model(self, r_t):
         self.k += 1  # clock always ticks up
-        self.tally[self.a_t] += r_t  # update reward tally
         # gather info to update model incrementally
-        k = self.k
-        a_t = self.a_t
-        Q_k = self.model[a_t]
-        Q_k_new = Q_k + 1/k*(r_t - Q_k)
-        # print('updating from {} to {} for arm {}'.format(Q_k, Q_k_new, a_t))
+        a_t = self.a_t  # action taken
+        k = self.tally[a_t]  # number of attempts for this action
+        Q_k = self.model[a_t]  # current model for that action
+        Q_k_new = Q_k + 1/k*(r_t - Q_k)  # update model with r_t
         self.model[a_t] = Q_k_new
-        # log new model
-        self.model_hist.append(self.model.copy())
+        self.model_hist.append(self.model.copy())  # log new model

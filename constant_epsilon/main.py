@@ -37,12 +37,12 @@ print('\nMODELS OF VARIOUS AGENTS:')
 agent1 = Agent(number_arms, epsilon=0, Q_0=-3)  # -1 epsilon will never explore
 reward1, model1 = test_agent(testbed, agent1, iters_test)
 
-agent2 = Agent(number_arms, epsilon=0.0, Q_0=-3)
+agent2 = Agent(number_arms, epsilon=0.01, Q_0=-3)
 reward2, model2 = test_agent(testbed, agent2, iters_test)
 
-agent3 = Agent(number_arms, epsilon=0.1)
+agent3 = Agent(number_arms, epsilon=0.1, Q_0=-3)
 reward3, model3 = test_agent(testbed, agent3, iters_test)
-# plot_model(model3, iters_test, testbed.arms)
+plot_model(model3, iters_test, testbed.arms)
 
 agent4 = Agent(number_arms, epsilon=1)
 reward4, model4 = test_agent(testbed, agent4, iters_test)
