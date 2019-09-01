@@ -9,7 +9,7 @@ class Agent():
         self.Q_0 = Q_0
         # -----------------------------------
         # memory:
-        self.k = 0  # internal memory of iteration
+        self.t = 0  # internal memory of iteration
         # list of expected values corresponding with arm id:
         self.model = [self.Q_0]*observed_size
         # list of attempt counts corresponding with arm id:
@@ -27,7 +27,7 @@ class Agent():
         return "".join(out)
 
     def choose_action(self):
-        if np.random.uniform() < self.epsilon or self.k == 0:
+        if np.random.uniform() < self.epsilon or self.t == 0:
             # explore
             a_t = np.random.randint(0, len(self.model))
         else:
@@ -39,7 +39,7 @@ class Agent():
         return a_t
 
     def update_model(self, r_t):
-        self.k += 1  # clock always ticks up
+        self.t += 1  # clock always ticks up
         # gather info to update model incrementally
         a_t = self.a_t  # action taken
         k = self.tally[a_t]  # number of attempts for this action
