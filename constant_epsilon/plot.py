@@ -1,5 +1,6 @@
 import numpy as np
 from bokeh.plotting import figure, output_file, show
+from bokeh.io import export_png
 
 
 def plot_model(agent_model_hist, iters, true_model, name='agent1'):
@@ -11,8 +12,9 @@ def plot_model(agent_model_hist, iters, true_model, name='agent1'):
     for arm in agent_model_hist:
         p.line(t, arm, legend=str(arm_id))
         arm_id += 1
-    output_file("plot_model_{}.html".format(name))
-    show(p)
+    # output_file("plot_model_{}.html".format(name))
+    export_png(p, filename="plot_model_{}.png".format(name))
+    # show(p)
     return
 
 
@@ -21,8 +23,9 @@ def plot_avg_performance(agent, iters, reward_hist):
     t = np.arange(0, iters - 1)
     r_avg = np.array(reward_hist)
     p.line(t, r_avg)
-    output_file("plot_avg_perf.html")
-    show(p)
+    # output_file("plot_avg_perf.html")
+    export_png(p, filename="plot_avg_perf.png")
+    # show(p)
     return
 
 
@@ -36,6 +39,7 @@ def compare_avg_performance(agent_list, iters, reward_hist_list, colors):
         p.line(
             t, r_avg, line_color=colors[i], legend=name)
     p.legend.location = 'bottom_right'
-    output_file("compare_avg_perf.html")
-    show(p)
+    # output_file("compare_avg_perf.html")
+    export_png(p, filename="compare_avg_perf.png")
+    # show(p)
     return
